@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SmokeTestSuite" verbose="1" parallel="classes" thread-count="1">
+    <listeners>
+        <listener class-name="com.talentLMS.UI.utils.AllureReportListener"/>
+    </listeners>
+    <test name="SmokeTest">
+        <classes>
+            <class name="uiTests.login.LoginTests"/>
+            <class name="uiTests.category.OpenCategoryPageTests"/>
+            <class name="uiTests.category.ActionCategoriesTests"/>
+            <class name="uiTests.accountAndSettings.HomepageTest"/>
+        </classes>
+    </test>
+    <test name="Regression">
+        <classes>
+            <class name="uiTests.RegressionUI.users.AddUserTest"/>
+            <class name="uiTests.RegressionUI.users.InstructorPageTest"/>
+            <class name="uiTests.RegressionUI.users.UsersPageDropdownFieldsTest"/>
+            <class name="uiTests.RegressionUI.users.LearnerPageTest"/>
+        </classes>
+    </test>
+</suite>

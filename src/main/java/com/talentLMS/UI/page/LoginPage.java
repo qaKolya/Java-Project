@@ -1,5 +1,7 @@
 package com.talentLMS.UI.page;
 
+import com.talentLMS.UI.dataProviders.ConfigReader;
+import org.apache.commons.logging.Log;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -8,18 +10,8 @@ import org.openqa.selenium.support.FindBy;
  */
 
 public class LoginPage extends BasePage {
-
-
-    @FindBy(xpath = "//a[text()='Home']")
-    public WebElement homeBtn;
-
-    @FindBy(id = "tl-cms-nav-login")
-    public WebElement loginBtn;
-
-    @FindBy(css = ".avatar-square")
-    public WebElement digitalNomadsLogo;
-
-    @FindBy(id = "tl-shared-username")
+String loginURLPage = "https://nuta1bema.talentlms.com/index";
+    @FindBy(xpath = "//input[@name='login']")
     public WebElement usernameInput;
 
     @FindBy(xpath = "//input[@type='password']")
@@ -31,17 +23,15 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//div[@class='toast-message']")
     public WebElement loginErrMess;
 
-
-    public LoginPage clickLoginBtn(){
-        elementActions.click(loginBtn);
+    public LoginPage fillUpUsernameAndPassword(){
+        elementActions.sendKeys(usernameInput,ConfigReader.getProperty("username"))
+                .sendKeys(passwordInput,ConfigReader.getProperty("password"))
+                .click(submitLoginBtn);
         return this;
     }
 
-    public LoginPage fillUpUsernameAndPassword(String userName,String password){
-        clickLoginBtn();
-        elementActions.sendKeys(usernameInput,userName)
-                .sendKeys(passwordInput,password)
-                .click(submitLoginBtn);
+    public LoginPage checkLoginUrlPage(){
+        elementActions.assertUrlPage(loginURLPage);
         return this;
     }
 }
